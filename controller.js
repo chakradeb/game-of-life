@@ -1,15 +1,28 @@
-const TABLESIZE = 20;
-let table = createTable(TABLESIZE);
+const TABLESIZE = 40;
+
+let createHTMLTable = function(){
+  let html = "";
+  let id = 1;
+  for(let row=0;row<TABLESIZE;row++){
+    html+=`<tr>\n`;
+    for(let col=0;col<TABLESIZE;col++){
+      html+=`<td id="${id}"></td>\n`;
+      id++;
+    }
+    html+=`</tr>\n`;
+  }
+  document.getElementById('table').innerHTML = html;
+}
 
 let getRowCol = function(id){
   console.log(id);
-  row = Math.floor(id/20);
-  col = (id%20)-1;
+  row = Math.floor(id/TABLESIZE);
+  col = (id%TABLESIZE)-1;
   return {'row':row,'col':col};
 }
 
 let getid = function(row,col){
-  return (row*20)+(col+1);
+  return (row*TABLESIZE)+(col+1);
 }
 
 let initiateLife = function() {
@@ -46,6 +59,9 @@ let simulateLife = function(){
   }
 }
 
+let table = createTable(TABLESIZE);
+createHTMLTable();
+
 let startGameOfLife = function(){
-  setInterval(simulateLife,1000);
+  setInterval(simulateLife,500);
 }
